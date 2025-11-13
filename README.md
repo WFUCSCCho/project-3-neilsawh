@@ -95,18 +95,50 @@ Using your favorite graphing software (e.g., MS Excel or Google Sheets), plot th
 vs. N for each case. Take a screenshot of your graph and put them here by modifying this file, committing, and pushing 
 it to this repository.
 
-Bubble Sort, Merge Sort, Quick Sort, and Heap Sort running time (already sorted):
 ![image](https://github.com/user-attachments/assets/76f103c8-8c02-4bec-9966-99568f2effb6)
+
+
+Bubble Sort, Merge Sort, Quick Sort, and Heap Sort running time (already sorted):
+
+1. <img width="748" height="401" alt="Screenshot 2025-11-13 at 2 33 28 AM" src="https://github.com/user-attachments/assets/be5bcebd-9e13-4251-becd-824262be8acc" />
+
+2. <img width="730" height="414" alt="Screenshot 2025-11-13 at 2 34 21 AM" src="https://github.com/user-attachments/assets/258e3e5b-0cbc-455f-8104-bc2b29e7c5e7" />
+
 
 Bubble Sort, Merge Sort, Quick Sort, and Heap Sort running time (shuffled):
 
+1. <img width="726" height="413" alt="Screenshot 2025-11-13 at 2 36 07 AM" src="https://github.com/user-attachments/assets/18a138fd-9a85-4a59-a6c9-85914bae65de" />
+
+2. <img width="721" height="397" alt="Screenshot 2025-11-13 at 2 36 39 AM" src="https://github.com/user-attachments/assets/f2f9e333-9fd5-4827-a21c-ecb9c30ca568" />
+
+
 Bubble Sort, Merge Sort, Quick Sort, and Heap Sort running time (reversed):
+
+1. <img width="729" height="430" alt="Screenshot 2025-11-13 at 2 38 43 AM" src="https://github.com/user-attachments/assets/147ee93d-05c2-472c-a337-3fdd332b1c87" />
+
+2. <img width="737" height="414" alt="Screenshot 2025-11-13 at 2 39 25 AM" src="https://github.com/user-attachments/assets/0924f5cf-768c-4341-87e5-89db432fc4e9" />
+
 
 Bubble Sort and Odd-Even Transposition Sort comparison (already sorted):
 
+1. <img width="814" height="397" alt="Screenshot 2025-11-13 at 2 46 54 AM" src="https://github.com/user-attachments/assets/89b1ff15-b26e-421f-980c-e0ce9a9f9ad3" />
+
+The slopes are identical
+
+
 Bubble Sort and Odd-Even Transposition Sort comparison (shuffled):
 
+1. <img width="818" height="390" alt="Screenshot 2025-11-13 at 2 50 15 AM" src="https://github.com/user-attachments/assets/cfcd1bc4-64ba-41d6-a5b7-dfe04ca8130c" />
+
+Very similar slight deviations
+
+
 Bubble Sort and Odd-Even Transposition Sort comparison (reversed):
+
+1.<img width="815" height="403" alt="Screenshot 2025-11-13 at 2 52 37 AM" src="https://github.com/user-attachments/assets/5d1bff1e-27cf-466f-87f9-1c7dbcd65713" />
+
+Again very similar slight deviations
+
 
 ## Submission:
 
