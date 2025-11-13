@@ -4,8 +4,12 @@
 @author: Neil Sawhney
 @date: November 13, 2025
  */
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Proj3 {
     // Merge Sort
@@ -149,7 +153,7 @@ public class Proj3 {
         // Store words
         ArrayList<String> data = new ArrayList<>();
         try {
-            java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(filename));
+            BufferedReader br = new BufferedReader(new FileReader(filename));
             String line;
             int count = 0;
             while ((line = br.readLine()) != null && count < numLines) {
@@ -163,82 +167,56 @@ public class Proj3 {
         }
 
         ArrayList<String> sortedList = new ArrayList<>(data);
-        java.util.Collections.sort(sortedList);
+        Collections.sort(sortedList);
 
         ArrayList<String> shuffledList = new ArrayList<>(data);
-        java.util.Collections.shuffle(shuffledList);
+        Collections.shuffle(shuffledList);
 
         ArrayList<String> reversedList = new ArrayList<>(data);
-        java.util.Collections.sort(reversedList, java.util.Collections.reverseOrder());
+        Collections.sort(reversedList, Collections.reverseOrder());
 
         StringBuilder results = new StringBuilder();
         results.append("Lines Evaluated: ").append(numLines).append("\n");
         results.append("Algorithm: ").append(algorithm).append("\n");
 
+        ArrayList<String> tempList = null;
         long startTime, endTime;
-        int comparisons;
-        ArrayList<String> tempList;
+        int comparisons = 0;
 
-        if (algorithm.equals("bubble")) {
-            // Already-Sorted
-            tempList = new ArrayList<>(sortedList);
-            startTime = System.nanoTime();
-            comparisons = bubbleSort(tempList, tempList.size());
-            endTime = System.nanoTime();
-            results.append("Already-Sorted Comparisons: ").append(comparisons).append("\n");
-            results.append("Already-Sorted Time: ").append(endTime - startTime).append(" ns\n");
+        String[] dataTypes = {"Already-Sorted", "Shuffled", "Reversed"};
+        ArrayList<ArrayList<String>> datasets = new ArrayList<>();
+        datasets.add(sortedList);
+        datasets.add(shuffledList);
+        datasets.add(reversedList);
 
-            // Shuffled
-            tempList = new ArrayList<>(shuffledList);
-            startTime = System.nanoTime();
-            comparisons = bubbleSort(tempList, tempList.size());
-            endTime = System.nanoTime();
-            results.append("Shuffled Comparisons: ").append(comparisons).append("\n");
-            results.append("Shuffled Time: ").append(endTime - startTime).append(" ns\n");
+        for (int i = 0; i < datasets.size(); i++) {
+            tempList = new ArrayList<>(datasets.get(i));
 
-            // Reversed
-            tempList = new ArrayList<>(reversedList);
-            startTime = System.nanoTime();
-            comparisons = bubbleSort(tempList, tempList.size());
-            endTime = System.nanoTime();
-            results.append("Reversed Comparisons: ").append(comparisons).append("\n");
-            results.append("Reversed Time: ").append(endTime - startTime).append(" ns\n");
-        } else {
-            // Already-Sorted
-            tempList = new ArrayList<>(sortedList);
-            startTime = System.nanoTime();
-            if (algorithm.equals("transposition")) transpositionSort(tempList, tempList.size());
-            else if (algorithm.equals("merge")) mergeSort(tempList, 0, tempList.size() - 1);
-            else if (algorithm.equals("quick")) quickSort(tempList, 0, tempList.size() - 1);
-            else if (algorithm.equals("heap")) heapSort(tempList, 0, tempList.size() - 1);
-            endTime = System.nanoTime();
-            results.append("Already-Sorted Time: ").append(endTime - startTime).append(" ns\n");
-
-            // Shuffled
-            tempList = new ArrayList<>(shuffledList);
-            startTime = System.nanoTime();
-            if (algorithm.equals("transposition")) transpositionSort(tempList, tempList.size());
-            else if (algorithm.equals("merge")) mergeSort(tempList, 0, tempList.size() - 1);
-            else if (algorithm.equals("quick")) quickSort(tempList, 0, tempList.size() - 1);
-            else if (algorithm.equals("heap")) heapSort(tempList, 0, tempList.size() - 1);
-            endTime = System.nanoTime();
-            results.append("Shuffled Time: ").append(endTime - startTime).append(" ns\n");
-
-            // Reversed
-            tempList = new ArrayList<>(reversedList);
-            startTime = System.nanoTime();
-            if (algorithm.equals("transposition")) transpositionSort(tempList, tempList.size());
-            else if (algorithm.equals("merge")) mergeSort(tempList, 0, tempList.size() - 1);
-            else if (algorithm.equals("quick")) quickSort(tempList, 0, tempList.size() - 1);
-            else if (algorithm.equals("heap")) heapSort(tempList, 0, tempList.size() - 1);
-            endTime = System.nanoTime();
-            results.append("Reversed Time: ").append(endTime - startTime).append(" ns\n");
+            if (algorithm.equals("bubble")) {
+                startTime = System.nanoTime();
+                comparisons = bubbleSort(tempList, tempList.size());
+                endTime = System.nanoTime();
+                results.append(dataTypes[i]).append(" Comparisons: ").append(comparisons).append("\n");
+                results.append(dataTypes[i]).append(" Time: ").append(endTime - startTime).append(" ns\n");
+            } else if (algorithm.equals("transposition")) {
+                comparisons = transpositionSort(tempList, tempList.size());
+                results.append(dataTypes[i]).append(" Comparisons: ").append(comparisons).append("\n");
+                // skip printing time
+            } else {
+                startTime = System.nanoTime();
+                if (algorithm.equals("merge")) mergeSort(tempList, 0, tempList.size() - 1);
+                else if (algorithm.equals("quick")) quickSort(tempList, 0, tempList.size() - 1);
+                else if (algorithm.equals("heap")) heapSort(tempList, 0, tempList.size() - 1);
+                endTime = System.nanoTime();
+                results.append(dataTypes[i]).append(" Time: ").append(endTime - startTime).append(" ns\n");
+            }
         }
+
 
         System.out.println(results.toString());
 
         // Append results to analysis.txt (CSV format)
-        try (java.io.FileWriter fw = new java.io.FileWriter("analysis.txt", true)) {
+        try (FileWriter fw = new FileWriter("analysis.txt", true)) {
             String resultLine = numLines + "," + algorithm + "," + results.toString().replace("\n", ";");
             fw.write(resultLine + System.lineSeparator());
         } catch (Exception e) {
@@ -246,7 +224,7 @@ public class Proj3 {
         }
 
         // Write the sorted list (overwrite sorted.txt)
-        try (java.io.FileWriter fw = new java.io.FileWriter("sorted.txt")) {
+        try (FileWriter fw = new FileWriter("sorted.txt")) {
             for (String val : tempList) {
                 fw.write(val + "\n");
             }
